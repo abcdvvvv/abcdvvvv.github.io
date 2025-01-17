@@ -1,7 +1,6 @@
 ---
-title: Inputs and outputs
-description: >-
-  Basic input and output of the Julia language.
+title: Inputs and Outputs
+description: Basic input and output of the Julia language.
 author: karei
 date: 2025-01-17 00:00:00 +0000
 categories: [Blogging]
@@ -44,7 +43,7 @@ The most straightforward way is to enter the variable name `matrix` into the REP
 
 We will get the following output:
 
-```terminal
+```2
 3×3 Matrix{Float64}:
  0.0         2.3456  20.0
  4.5678      5.0      1.23457e5
@@ -54,7 +53,7 @@ We will get the following output:
 > `MIME(“text/plain”)` indicates a human-readable log format. 
 {: .prompt-info }
 
-Another set of output functions are `print(matrix)`, `println(matrix)`, and `show([io], matrix)`, they all call `Base.show(stdout, matrix)`. **Their output is more concise and easy to use as input/output for program data streams:**
+Another set of output functions are `print(matrix)`, `println(matrix)`, and `show(matrix)`, they all call `Base.show(stdout, matrix)`. Their output is more concise and easy to use as input/output for program data streams:
 
 ```2
 [0.0 2.3456 20.0; 4.5678 5.0 123456.789; 0.001234 123.456 7.8901e-6]
@@ -62,7 +61,7 @@ Another set of output functions are `print(matrix)`, `println(matrix)`, and `sho
 
 To print all decimals, use `Base.print_matrix(stdout, matrix)`
 
-```terminal
+```2
  0.0         2.3456      20.0
  4.5678      5.0     123456.789
  0.001234  123.456        7.8901e-6
@@ -82,7 +81,7 @@ println("matrix=[" * join(map(x -> @sprintf("%.4f", x), matrix), "  ") * "]")
 
 In this way, the integers in the matrix are not accompanied by “.0” and the length of each number is controlled.
 
-```2terminal
+```2
       0    2.35      20
    4.57       5 1.23e+05
 0.00123     123 7.89e-06
@@ -90,7 +89,7 @@ In this way, the integers in the matrix are not accompanied by “.0” and the 
 
 ### Using PrettyTables.jl
 
-PrettyTables.jl provides a format for printing matrices specifically, and the same can be done with `"%7.3g  "` for pretty printing.
+PrettyTables.jl provides a format for printing matrices specifically, and the same can be done with `"%.3g  "` for pretty printing.
 
 ```julia
 using PrettyTables
@@ -122,10 +121,15 @@ Output is a string:`"123,456,789"`
 
 ## Output to VS code's table window
 
-`vscodedisplay()` opens a new window in VS code that displays the variables in a tabular form, for example:
-
-```julia
-vscodedisplay(matrix)
-```
+`vscodedisplay(matrix)` opens a new window in VS code that displays the variables in a tabular form.
 
 ![Desktop View](/01.png){: width="320" .normal}
+
+## Output to MS excel
+
+```julia
+using DataFrames, XLSX
+fname = "report.xlsx"
+isfile(fname) && rm(fname)
+writetable(fname, "Report A" => DataFrame(matrix, :auto))
+```
