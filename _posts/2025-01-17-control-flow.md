@@ -5,7 +5,7 @@ author: karei
 date: 2025-01-17 00:00:00 +0000
 categories: [Blogging]
 tags: [tutorial, programming, julia]
-pin: true
+pin: false
 media_subpath: '/posts/20250117'
 ---
 
@@ -21,7 +21,7 @@ To iterate over the elements within an array, there are several different ways t
  4  8  12  16
 ```
 
-1. **eachindex(a)**
+### 1. eachindex(a)
 
 In Julia, matrices are stored column-first. Hence, `eachindex()` iterates over matrix a in column order.
 
@@ -43,7 +43,7 @@ Index: 6, Element: 6
 ...
 ```
 
-2. **a**
+### 2. a
 
 - `in a` returns each element of a matrix, of type `eltype(a)`
 
@@ -53,14 +53,14 @@ for element in a
 end
 ```
 
-3. **pairs(a)**
+### 3. pairs(a)
 
 The `pairs()` function, when used as an iterator, can iterate not only over arrays, but also over Pairs and dictionaries.
 
 - `pairs(a::Vector)` returns a pair of index and value, of type `Tuple{Int,eltype(a)}`
 - `pairs(a::Matrix)` returns a pair of index and value, of type `Tuple{CartesianIndex{2},eltype(a)}`
 <!-- - `pairs(::Tuple{Pair})`, `pairs(::Vector{Pair})` returns a pair of key and value, of type `Tuple{eltype(a[i].first),eltype(a[i].second)}` -->
-- `pairs(::Dict)` returns a pair of index and value, of type `Tuple{eltype(a.keys),eltype(a.vals)}`
+- `pairs(::Dict)` returns a pair of key and value, of type `Tuple{eltype(a.keys),eltype(a.vals)}`
 
 A `[println("Index: $i, Element: $element") for (i, element) in pairs(a)]` gives:
 
@@ -74,7 +74,7 @@ Index: CartesianIndex(2, 2), Element: 6
 ...
 ```
 
-4. **enumerate(a)**
+### 4. enumerate(a)
 
 The first parameter *i* produced by `enumerate` is the index of natural number starting from 1.
 
@@ -90,7 +90,7 @@ Index: 6, Element: 6
 ...
 ```
 
-5. **axes(a,n)**
+### 5. axes(a,n)
 
 This function iterates over the *n*th axis of array `a`.
 
