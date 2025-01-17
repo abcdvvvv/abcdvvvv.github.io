@@ -1,202 +1,129 @@
 ---
 title: Control Flow
-description: Examples of text, typography, math equations, diagrams, flowcharts, pictures, videos, and more.
-author: cotes
-date: 2019-08-08 11:33:00 +0800
-categories: [Blogging, Demo]
-tags: [typography]
+description: Different ways to write for loop in Julia lang.
+author: karei
+date: 2025-01-17 00:00:00 +0000
+categories: [Blogging]
+tags: [tutorial, programming, julia]
 pin: true
-math: true
-mermaid: true
-image:
-  path: https://chirpy-img.netlify.app/commons/devices-mockup.png
-  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: Responsive rendering of Chirpy theme on multiple devices.
+media_subpath: '/posts/20250117'
 ---
 
 ## The for loop
 
-<!-- markdownlint-capture -->
-<!-- markdownlint-disable -->
-# H1 — heading
-{: .mt-4 .mb-0 }
+To iterate over the elements within an array, there are several different ways to write the code. Now suppose we have such an array: `a = copy(reshape(1:16, 4, 4))`
 
-Hello world
-
-## H2 — heading
-{: data-toc-skip='' .mt-4 .mb-0 }
-
-### H3 — heading
-{: data-toc-skip='' .mt-4 .mb-0 }
-
-#### H4 — heading
-{: data-toc-skip='' .mt-4 }
-<!-- markdownlint-restore -->
-
-## Paragraph
-
-Hello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello world.
-
-## Lists
-
-### Ordered list
-
-1. Firstly
-2. Secondly
-3. Thirdly
-
-### Unordered list
-
-- Chapter
-  - Section
-    - Paragraph
-
-### ToDo list
-
-- [ ] Job
-  - [x] Step 1
-  - [x] Step 2
-  - [ ] Step 3
-
-### Description list
-
-Sun
-: the star around which the earth orbits
-
-Moon
-: the natural satellite of the earth, visible by reflected light from the sun
-
-## Block Quote
-
-> This line shows the _block quote_.
-
-## Prompts
-
-<!-- markdownlint-capture -->
-<!-- markdownlint-disable -->
-> An example showing the `tip` type prompt.
-{: .prompt-tip }
-
-> An example showing the `info` type prompt.
-{: .prompt-info }
-
-> An example showing the `warning` type prompt.
-{: .prompt-warning }
-
-> An example showing the `danger` type prompt.
-{: .prompt-danger }
-<!-- markdownlint-restore -->
-
-## Tables
-
-| Company                      | Contact          | Country |
-| :--------------------------- | :--------------- | ------: |
-| Alfreds Futterkiste          | Maria Anders     | Germany |
-| Island Trading               | Helen Bennett    |      UK |
-| Magazzini Alimentari Riuniti | Giovanni Rovelli |   Italy |
-
-## Links
-
-<http://127.0.0.1:4000>
-
-## Footnote
-
-Click the hook will locate the footnote[^footnote], and here is another footnote[^fn-nth-2].
-
-## Inline code
-
-This is an example of `Inline Code`.
-
-## Filepath
-
-Here is the `/path/to/the/file.extend`{: .filepath}.
-
-## Code blocks
-
-### Common
-
-```text
-This is a common code snippet, without syntax highlight and line number.
+```2
+4×4 Matrix{Int64}:
+ 1  5   9  13
+ 2  6  10  14
+ 3  7  11  15
+ 4  8  12  16
 ```
 
-### Specific Language
+1. **eachindex(a)**
 
-```bash
-if [ $? -ne 0 ]; then
-  echo "The command was not successful.";
-  #do the needful / exit
-fi;
+In Julia, matrices are stored column-first. Hence, `eachindex()` iterates over matrix a in column order.
+
+- `eachindex()` returns the index of each element of a matrix, of type `Int`
+
+```julia
+for i in eachindex(a)
+    println("Index: $i, Element: $(a[i])")
+end
 ```
 
-### Specific filename
-
-```sass
-@import
-  "colors/light-typography",
-  "colors/dark-typography";
-```
-{: file='_sass/jekyll-theme-chirpy.scss'}
-
-## Mathematics
-
-The mathematics powered by [**MathJax**](https://www.mathjax.org/):
-
-$$
-\begin{equation}
-  \sum_{n=1}^\infty 1/n^2 = \frac{\pi^2}{6}
-  \label{eq:series}
-\end{equation}
-$$
-
-We can reference the equation as \eqref{eq:series}.
-
-When $a \ne 0$, there are two solutions to $ax^2 + bx + c = 0$ and they are
-
-$$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
-
-## Mermaid SVG
-
-```mermaid
- gantt
-  title  Adding GANTT diagram functionality to mermaid
-  apple :a, 2017-07-20, 1w
-  banana :crit, b, 2017-07-23, 1d
-  cherry :active, c, after b a, 1d
+```2
+Index: 1, Element: 1
+Index: 2, Element: 2
+Index: 3, Element: 3
+Index: 4, Element: 4
+Index: 5, Element: 5
+Index: 6, Element: 6
+...
 ```
 
-## Images
+2. **a**
 
-### Default (with caption)
+- `in a` returns each element of a matrix, of type `eltype(a)`
 
-图片已删除
-_Full screen width and center alignment_
+```julia
+for element in a
+    println("Element: $element")
+end
+```
 
-### Left aligned
+3. **pairs(a)**
 
-图片已删除
+The `pairs()` function, when used as an iterator, can iterate not only over arrays, but also over Pairs and dictionaries.
 
-### Float to left
+- `pairs(a::Vector)` returns a pair of index and value, of type `Tuple{Int,eltype(a)}`
+- `pairs(a::Matrix)` returns a pair of index and value, of type `Tuple{CartesianIndex{2},eltype(a)}`
+<!-- - `pairs(::Tuple{Pair})`, `pairs(::Vector{Pair})` returns a pair of key and value, of type `Tuple{eltype(a[i].first),eltype(a[i].second)}` -->
+- `pairs(::Dict)` returns a pair of index and value, of type `Tuple{eltype(a.keys),eltype(a.vals)}`
 
-图片已删除
-Praesent maximus aliquam sapien. Sed vel neque in dolor pulvinar auctor. Maecenas pharetra, sem sit amet interdum posuere, tellus lacus eleifend magna, ac lobortis felis ipsum id sapien. Proin ornare rutrum metus, ac convallis diam volutpat sit amet. Phasellus volutpat, elit sit amet tincidunt mollis, felis mi scelerisque mauris, ut facilisis leo magna accumsan sapien. In rutrum vehicula nisl eget tempor. Nullam maximus ullamcorper libero non maximus. Integer ultricies velit id convallis varius. Praesent eu nisl eu urna finibus ultrices id nec ex. Mauris ac mattis quam. Fusce aliquam est nec sapien bibendum, vitae malesuada ligula condimentum.
+A `[println("Index: $i, Element: $element") for (i, element) in pairs(a)]` gives:
 
-### Float to right
+```2
+Index: CartesianIndex(1, 1), Element: 1
+Index: CartesianIndex(2, 1), Element: 2
+Index: CartesianIndex(3, 1), Element: 3
+Index: CartesianIndex(4, 1), Element: 4
+Index: CartesianIndex(1, 2), Element: 5
+Index: CartesianIndex(2, 2), Element: 6
+...
+```
 
-图片已删除
-Praesent maximus aliquam sapien. Sed vel neque in dolor pulvinar auctor. Maecenas pharetra, sem sit amet interdum posuere, tellus lacus eleifend magna, ac lobortis felis ipsum id sapien. Proin ornare rutrum metus, ac convallis diam volutpat sit amet. Phasellus volutpat, elit sit amet tincidunt mollis, felis mi scelerisque mauris, ut facilisis leo magna accumsan sapien. In rutrum vehicula nisl eget tempor. Nullam maximus ullamcorper libero non maximus. Integer ultricies velit id convallis varius. Praesent eu nisl eu urna finibus ultrices id nec ex. Mauris ac mattis quam. Fusce aliquam est nec sapien bibendum, vitae malesuada ligula condimentum.
+4. **enumerate(a)**
 
-### Dark/Light mode & Shadow
+The first parameter *i* produced by `enumerate` is the index of natural number starting from 1.
 
-The image below will toggle dark/light mode based on theme preference, notice it has shadows.
+A `[println("Index: $i, Element: $element") for (i, element) in enumerate(a)]` gives:
 
-图片已删除
-图片已删除
+```2
+Index: 1, Element: 1
+Index: 2, Element: 2
+Index: 3, Element: 3
+Index: 4, Element: 4
+Index: 5, Element: 5
+Index: 6, Element: 6
+...
+```
 
-## Video
+5. **axes(a,n)**
 
-{% include embed/youtube.html id='Balreaj8Yqs' %}
+This function iterates over the *n*th axis of array `a`.
 
-## Reverse Footnote
+```julia
+for element in axes(a, 1)
+    println("Element: $element")
+end
+```
 
-[^footnote]: The footnote source
-[^fn-nth-2]: The 2nd footnote source
+```2
+Element: 1
+Element: 2
+Element: 3
+Element: 4
+```
+
+### Creating Iterators
+
+An iterator can be created using parentheses wrapped around an array and a for loop -> `(a[i] for i in a)`
+
+For example, we can create a row index iterator for matrix x:
+
+```julia
+x = rand(1000, 4);
+eachrow_x = (x[i:i, :] for i in axes(x, 1));
+eachrow_x = (view(x, i:i, :) for i in axes(x, 1));
+eachrow_x = eachrow(x);
+for (i, xi) in enumerate(eachrow_x)
+    println("Index: $i, Element: $element")
+    xi[1] = 0.0
+end
+```
+
+- Line 2 let the for loop performs a slicing operation on the matrix x at each iteration, producing a new vector for which a memory allocation occurs.
+
+- Lines 3 and 4 are equivalent iterators that let the for loop produce a row view of the matrix x per iteration. No memory allocation.
