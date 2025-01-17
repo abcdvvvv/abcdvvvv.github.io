@@ -3,9 +3,9 @@ title: Inputs and outputs
 description: >-
   Basic input and output of the Julia language.
 author: karei
-date: 2025-01-17 +0800
-categories: [Blogging, Julia]
-tags: [Tutorial, Julia, IO]
+date: 2025-01-17 00:00:00 +0000
+categories: [Blogging]
+tags: [tutorial, programming, julia]
 pin: false
 media_subpath: '/posts/20250117'
 ---
