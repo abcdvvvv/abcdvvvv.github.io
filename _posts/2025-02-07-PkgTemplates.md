@@ -2,7 +2,7 @@
 title: Create new package via PkgTemplates.jl
 author: karei
 date: 2025-02-07 00:00:00 +0000
-categories: [Blogging]
+categories: [Blogging, Julia]
 tags: [tutorial, programming, julia]
 pin: false
 media_subpath: '/posts/20250117'

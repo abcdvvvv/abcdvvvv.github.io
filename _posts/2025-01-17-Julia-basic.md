@@ -3,7 +3,7 @@ title: Inputs and Outputs
 description: Basic input and output of the Julia language.
 author: karei
 date: 2025-01-17 00:00:00 +0000
-categories: [Blogging]
+categories: [Blogging, Julia]
 tags: [tutorial, programming, julia]
 pin: false
 media_subpath: '/posts/20250117'
