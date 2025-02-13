@@ -39,7 +39,7 @@ matrix = [0.0 2.3456 20.0;
     0.001234 123.456 0.0000078901]
 ```
 
-The most straightforward way is to enter the variable name `matrix` into the REPL, which is equivalent to `display(matrix)` and `@info "Message" matrix`, they all call `Base.show(stdout, MIME("text/plain"), matrix)`.
+The most straightforward way is to enter the variable name `matrix` into the REPL, which is equivalent to `display(matrix)` and `@info "Message" matrix`, they all call `Base.show(stdout, "text/plain", matrix)`.
 
 We will get the following output:
 
@@ -50,7 +50,7 @@ We will get the following output:
  0.001234  123.456    7.8901e-6
 ```
 
-> `MIME(“text/plain”)` indicates a human-readable log format. 
+> `"text/plain"` or `MIME("text/plain)` as the second argument indicates a human-readable log format. 
 {: .prompt-info }
 
 Another set of output functions are `print(matrix)`, `println(matrix)`, and `show(matrix)`, they all call `Base.show(stdout, matrix)`. Their output is more concise and easy to use as input/output for program data streams:
@@ -93,7 +93,12 @@ PrettyTables.jl provides a format for printing matrices specifically, and the sa
 
 ```julia
 using PrettyTables
-pretty_table(matrix; tf=tf_matrix, show_header=false, formatters=ft_printf("%.3g"), display_size=(-1, -1))
+pretty_table(matrix; 
+    tf=tf_matrix, 
+    show_header=false, 
+    formatters=ft_printf("%.3g"), 
+    isplay_size=(-1, -1)
+)
 ```
 
 ```2
