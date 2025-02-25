@@ -27,7 +27,8 @@ t = Template(
         # version::VersionNumber: The initial version of created packages.
         Tests(),
         Readme(),
-        GitHubActions(; windows=true, extra_versions=["1.10", "1.11", "pre"]),
+        License(name="ASL")
+        GitHubActions(; extra_versions=["1.10", "1.11"]), # "pre"
         TagBot(),
         CompatHelper(), # Automatically check for dependent updates and generate PRs
         Documenter{GitHubActions}(), # Add GitHub Actions-based online documentation build support for packages
