@@ -23,12 +23,12 @@ t = Template(
     julia=v"1.10",
     # Configure multiple plugins to customize various aspects of the package
     plugins=[
-        ProjectFile(; version=v"1.0.0-DEV"), # Creates a Project.toml.
+        ProjectFile(version=v"1.0.0-DEV"), # Creates a Project.toml.
         # version::VersionNumber: The initial version of created packages.
         Tests(),
         Readme(),
-        License(name="ASL")
-        GitHubActions(; extra_versions=["1.10", "1.11"]), # "pre"
+        License(name="ASL"),
+        GitHubActions(extra_versions=["1.10", "1.11"]), # "pre"
         TagBot(),
         CompatHelper(), # Automatically check for dependent updates and generate PRs
         Documenter{GitHubActions}(), # Add GitHub Actions-based online documentation build support for packages
