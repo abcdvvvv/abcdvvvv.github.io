@@ -47,7 +47,7 @@ t = Template(
 )
 ```
 
-Use the template to generate a new package, and name the package "MyNewPackage.jl".
+Use the template to generate a new package, and name the package "MyNewPackage".
 ```julia
-generate(t, "MyNewPackage.jl")
+generate(t, "MyNewPackage")
 ```
